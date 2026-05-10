@@ -1,0 +1,30 @@
+# Python-generated files
+**/__pycache__/
+**/*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+**/.venv
+
+# Environment variables
+.env
+.env.*
+
+# Docker
+docker-compose.override.yml
+
+# n8n
+n8n/workflows/*.json
+!n8n/workflows/README.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.iml

@@ -1,0 +1,28 @@
+services:
+  agent:
+    build: ./agent
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./agent:/app
+      - /app/.venv # prevents local .venv from overriding container
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+
+  n8n:
+    image: n8nio/n8n
+    ports:
+      - "5679:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5679/
+      - GENERIC_TIMEZONE=UTC
+    volumes:
+      - ./n8n:/home/node/.n8n
+    command: start
